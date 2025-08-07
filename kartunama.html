@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editable Cream Soda ID Card</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="id-card-container" id="id-card-to-download">
+        <div class="photo-and-header-wrapper">
+            <div class="header-outside">
+                <p>IDENTIFICATION CARD</p>
+                <p class="editable-text" contenteditable="true" spellcheck="false">NO 202305078899</p>
+            </div>
+            <div class="photo-section" onclick="document.getElementById('photo-upload').click()">
+                <img id="card-photo" src="https://pbs.twimg.com/media/GRajO3oakAAAjZm.jpg" alt="Person's Photo">
+            </div>
+        </div>
+        <div class="text-section">
+            <div class="logo">
+                <span contenteditable="true" spellcheck="false">Cream</span><span contenteditable="true" spellcheck="false" style="margin-top:-20px">SODA</span>
+            </div>
+            <div class="details-grid">
+                <div>
+                    <strong>NAME:</strong><br>
+                    <span class="editable-text" contenteditable="true" spellcheck="false">MAEDA RIKU</span>
+                </div>
+                <div>
+                    <strong>BIRTH DATE:</strong><br>
+                    <span class="editable-text" contenteditable="true" spellcheck="false">2003/06/28</span>
+                </div>
+                <div>
+                    <strong>PRONOUNS:</strong><br>
+                    <span class="editable-text" contenteditable="true" spellcheck="false">HE/HIM</span>
+                </div>
+                <div>
+                    <strong>POSITION:</strong><br>
+                    <span class="editable-text" contenteditable="true" spellcheck="false">CUNT SERVER</span>
+                </div>
+                <div>
+                    <strong>DATE OF ISSUE:</strong><br>
+                    <span class="editable-text" contenteditable="true" spellcheck="false">01/01/2023</span>
+                </div>
+                <div>
+                    <strong>DATE OF EXPIRY:</strong><br>
+                    <span class="editable-text" contenteditable="true" spellcheck="false">01/01/2028</span>
+                </div>
+            </div>
+            <div class="barcode-section"></div>
+            <div class="legal-text">
+                <p style="text-align: right; font-family: 'Press Start 2P', cursive; font-size: 10px; margin-top: 10px;">
+                    THE HOLDER OF THIS CARD IS A <span class="editable-text" contenteditable="true" spellcheck="false">FAIRY</span>
+                </p>
+            </div>
+        </div>
+        <div class="footer-text">
+            <span class="editable-text" contenteditable="true" spellcheck="false">WANNA TASTE HIS <span>CREAMY BREATH</span>?</span>
+        </div>
+    </div>
+    
+    <button class="download-btn" onclick="downloadCard()">Download Kartu ID</button>
+    
+    <input type="file" id="photo-upload" accept="image/*" style="display: none;">
+
+    <div class="hint">
+        Klik pada teks untuk mengedit, dan klik pada foto untuk mengubahnya.
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
