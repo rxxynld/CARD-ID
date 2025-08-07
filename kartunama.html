@@ -283,6 +283,287 @@
         function downloadCard() {
             const cardElement = document.getElementById('id-card-to-download');
             
+            // Simpan referensi ke foto asli
+            const originalPhoto = document.getElementById('card-photo');
+            const originalSrc = originalPhoto.src;
+            
+            // Buat elemen <img> sementara untuk memastikan ukuran asli
+            const tempImg = new Image();
+            tempImg.src = originalSrc;
+            
+            tempImg.onload = () => {
+                // Atur ukuran <img> agar sesuai dengan rasio asli sebelum diambil screenshot
+                originalPhoto.style.height = 'auto';
+                originalPhoto.style.width = '100%';
+                
+                // Ambil screenshot
+                html2canvas(cardElement, {
+                    scale: 2,
+                    logging: false,
+                    useCORS: true
+                }).then(function(canvas) {
+                    // Kembalikan style <img> ke semula
+                    originalPhoto.style.height = '100%';
+                    originalPhoto.style.width = '100%';
+
+                    // Unduh gambar
+                    canvas.toBlob(function(blob) {
+                        saveAs(blob, 'kartu-id-cream-soda.png');
+                    });
+                });
+            };
+        }
+    </script>
+</body>
+</html>            height: 480px;
+            display: flex;
+            position: relative;
+            box-sizing: border-box;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+            background-image: linear-gradient(135deg, #f0f0e8 25%, transparent 25%),
+                              linear-gradient(225deg, #f0f0e8 25%, transparent 25%),
+                              linear-gradient(45deg, #f0f0e8 25%, transparent 25%),
+                              linear-gradient(315deg, #f0f0e8 25%, #fff 25%);
+            background-position: 10px 0, 10px 0, 0 10px, 0 10px;
+            background-size: 20px 20px;
+        }
+        
+        .photo-and-header-wrapper {
+            display: flex;
+            flex-direction: column;
+            width: 45%;
+            margin-bottom: 20px;
+        }
+
+        .photo-section {
+            background-color: var(--pink-light);
+            flex-grow: 1;
+            aspect-ratio: 1 / 1.3;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 3px solid var(--black);
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .photo-section img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .barcode-section {
+            background-color: var(--white);
+            height: 50px;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 0 10px;
+            box-sizing: border-box;
+        }
+
+        .barcode-section::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            background-image: repeating-linear-gradient(0deg, var(--black), var(--black) 2px, transparent 2px, transparent 4px);
+            opacity: 0.8;
+        }
+
+        .text-section {
+            width: 55%;
+            padding-left: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        .logo {
+            font-family: 'Bangers', cursive;
+            font-size: 100px;
+            color: var(--pink-light);
+            text-shadow: -5px -5px 0px var(--black),
+                         -5px 5px 0px var(--black),
+                         5px -5px 0px var(--black),
+                         5px 5px 0px var(--black),
+                         -10px -10px 0px var(--pink-dark),
+                         -10px 10px 0px var(--pink-dark),
+                         10px -10px 0px var(--pink-dark),
+                         10px 10px 0px var(--pink-dark);
+            line-height: 0.8;
+            margin-bottom: 20px;
+            cursor: pointer;
+            text-align: center;
+        }
+        
+        .logo span {
+            display: block;
+            margin-top: -20px;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 12px;
+            line-height: 1.4;
+        }
+
+        .details-grid div {
+            border-bottom: 2px solid var(--black);
+            padding-bottom: 5px;
+        }
+        
+        .editable-text {
+            cursor: pointer;
+            display: inline-block;
+            min-width: 50px;
+        }
+        
+        .header-outside {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 10px;
+            color: var(--black);
+            line-height: 1.2;
+            text-align: center;
+            margin-bottom: 5px; 
+        }
+
+        .footer-text {
+            background-color: var(--pink-dark);
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 10px;
+            text-align: center;
+            font-family: 'Press Start 2P', cursive;
+            color: var(--cream);
+            font-size: 12px;
+            border-radius: 0 0 15px 15px;
+            border-top: 3px solid var(--black);
+            cursor: pointer;
+        }
+
+        .footer-text span {
+            color: var(--white);
+        }
+
+        .hint {
+            color: var(--white);
+            font-family: sans-serif;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .download-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-top: 20px;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+        .download-btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="id-card-container" id="id-card-to-download">
+        <div class="photo-and-header-wrapper">
+            <div class="header-outside">
+                <p>IDENTIFICATION CARD</p>
+                <p class="editable-text" contenteditable="true" spellcheck="false">NO 202305078899</p>
+            </div>
+            <div class="photo-section" onclick="document.getElementById('photo-upload').click()">
+                <img id="card-photo" src="https://images.unsplash.com/photo-1549247714-38c2323e1f5a?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Person's Photo">
+            </div>
+        </div>
+        <div class="text-section">
+            <div class="logo">
+                <span contenteditable="true" spellcheck="false">Cream</span><span contenteditable="true" spellcheck="false" style="margin-top:-20px">SODA</span>
+            </div>
+            <div class="details-grid">
+                <div>
+                    <strong>NAME:</strong><br>
+                    <span class="editable-text" contenteditable="true" spellcheck="false">KIM MINSEOK</span>
+                </div>
+                <div>
+                    <strong>BIRTH DATE:</strong><br>
+                    <span class="editable-text" contenteditable="true" spellcheck="false">1990/03/26</span>
+                </div>
+                <div>
+                    <strong>PRONOUNS:</strong><br>
+                    <span class="editable-text" contenteditable="true" spellcheck="false">HE/HIM</span>
+                </div>
+                <div>
+                    <strong>POSITION:</strong><br>
+                    <span class="editable-text" contenteditable="true" spellcheck="false">C**NT SERVER</span>
+                </div>
+                <div>
+                    <strong>DATE OF ISSUE:</strong><br>
+                    <span class="editable-text" contenteditable="true" spellcheck="false">01/01/2023</span>
+                </div>
+                <div>
+                    <strong>DATE OF EXPIRY:</strong><br>
+                    <span class="editable-text" contenteditable="true" spellcheck="false">01/01/2028</span>
+                </div>
+            </div>
+            <div class="barcode-section"></div>
+            <div class="legal-text">
+                <p style="text-align: right; font-family: 'Press Start 2P', cursive; font-size: 10px; margin-top: 10px;">
+                    THE HOLDER OF THIS CARD IS A <span class="editable-text" contenteditable="true" spellcheck="false">FAIRY</span>
+                </p>
+            </div>
+        </div>
+        <div class="footer-text">
+            <span class="editable-text" contenteditable="true" spellcheck="false">WANNA TASTE HIS <span>CREAMY BREATH</span>?</span>
+        </div>
+    </div>
+    
+    <button class="download-btn" onclick="downloadCard()">Download Kartu ID</button>
+    
+    <input type="file" id="photo-upload" accept="image/*" style="display: none;">
+
+    <div class="hint">
+        Klik pada teks untuk mengedit, dan klik pada foto untuk mengubahnya.
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+
+    <script>
+        document.getElementById('photo-upload').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('card-photo').src = e.target.result;
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        function downloadCard() {
+            const cardElement = document.getElementById('id-card-to-download');
+            
             // Menggunakan html2canvas untuk mengambil screenshot dari elemen
             html2canvas(cardElement, {
                 scale: 2, 
@@ -299,3 +580,4 @@
     </script>
 </body>
 </html>
+
